@@ -1,6 +1,6 @@
 # YouTube-Comments-Navigator
 
-YTCommentsNavigator is a web application that enables users to perform customized searches of YouTube comments. Built with the MERN stack, Python, and the YouTube Data API, this tool allows users to search within the comments, filter comments by likes, and analyze sentiment i.e., positive or negative. It provides enhanced comment navigation tailored to user needs :)
+YTCommentsNavigator is a web application that enables users to perform customized navigation of YouTube comments. Built with the MERN stack, Python, and the YouTube Data API, this tool allows users to search within the comments, filter comments by likes, and analyze sentiment i.e., positive or negative. It provides enhanced comment navigation tailored to user needs :)
 
 ## Features and Benefits
 
