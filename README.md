@@ -119,7 +119,7 @@ These routes work together for providing users with customized search capabiliti
 
 ## Contributing
 
-I built YTCommentsNavigator because I often found myself endlessly scrolling through YouTube comments, looking for the most liked ones and discussions about topics of my concern. I believe with functionalities like these, it provides for a better user experience, saving time and enabling efficient navigation.
+I started this project because I often found myself endlessly scrolling through YouTube comments, looking for the most liked ones and discussions about topics of my concern. I believe with functionalities like these, it provides for a better user experience, saving time and enabling efficient navigation.
 
 If you feel the same way and have ideas for new features or improvements to existing ones, you can start with this project and build additional features upon it to enhance its functionality further. Your contributions are always welcome, and a mention of my initial work is highly appreciated :)
 
