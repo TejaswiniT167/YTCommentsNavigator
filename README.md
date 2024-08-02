@@ -117,6 +117,34 @@ The backend directs to various routes to achieve different functionalities:
 
 These routes work together for providing users with customized search capabilities and insights.
 
+## Dockerization
+
+Dockerization allows you to run the entire application with minimal setup. Instead of following the above commands, you can use Docker to containerize the application and ensure it runs consistently across different environments, allowing for simplifying deployment and managing dependencies.
+
+**Prerequisites :** Docker Desktop
+
+### Steps to dockerize
+
+1. **Clone the repository and set up environment variables:**
+
+   Follow the first two steps from the [Getting Started](#getting-started) section to clone the repository and set up your `.env` file with the necessary your credentials.
+
+2. **Build your Docker container and run the app:**
+
+   ```bash
+   docker build -t ytcommentsnavigator .
+   docker run -p 5000:5000 --env-file .env ytcommentsnavigator
+   ```
+
+   This command will build the Docker image for the application and then start the container.
+
+This will build the Docker images for the frontend, backend, and Python scripts, and then start the containers.
+Once the containers are up and running, the web app can be accessed at `http://localhost:5000`.
+
+#### Note: if you are running the application locally without Docker, you can safely delete the Docker-related `Dockerfile` from the repository.
+
+In this project, docker-compose.yml might not be necessary since a single container handles the frontend, backend, and Python child process calls. However, if each service becomes more complex or you add additional features or separate services like a local database, Docker Compose will be beneficial for managing and orchestrating multiple containers efficiently.
+
 ## Contributing
 
 I started this project because I often found myself endlessly scrolling through YouTube comments, looking for the most liked ones and discussions about topics of my concern. I believe with functionalities like these, it provides for a better user experience, saving time and enabling efficient navigation.
