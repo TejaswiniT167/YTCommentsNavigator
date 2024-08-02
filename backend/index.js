@@ -16,7 +16,11 @@ app.use(cors()); // Enable CORS i.e Cross-origin resource sharing for all routes
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-// MongoDB connection, to make sure your ip hasn't changed and connected to mongodb, else you have to add your current IP in the mongodb website settings to permit access :D
+//routing to index.html i.e our root html file, for any other routes.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+}); 
+// MongoDB connection, to make sure your IP hasn't changed and connected to MongoDB, else you have to add your current IP in the MongoDB website settings to permit access :D
 const mongoURI = process.env.MONGO_URI;
 mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('MongoDB connected...'))
@@ -26,13 +30,13 @@ mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
 app.post('/api/fetch_comments', (req, res) => {
     const { id } = req.body;
 
-    const pythonProcess = spawn('python', ['../python/get_store_comments.py', id]);
+    const pythonProcess = spawn('python3', ['../python/get_store_comments.py', id]);
 
     pythonProcess.on('close', (code) => {
         if (code !== 0) {
             return res.status(500).send('Error fetching comments');
         }
-        const retrieveProcess = spawn('python', ['../python/retrieve_data.py', 'fetch', '']);
+        const retrieveProcess = spawn('python3', ['../python/retrieve_data.py', 'fetch', '']);
         let dataToSend = '';
         retrieveProcess.stdout.on('data', (data) => {
             dataToSend += data.toString();
@@ -56,7 +60,7 @@ app.post('/api/fetch_comments', (req, res) => {
 app.post('/api/search', (req, res) => {
     const { query } = req.body;
 
-    const pythonProcess = spawn('python', ['../python/retrieve_data.py', 'search', query]);
+    const pythonProcess = spawn('python3', ['../python/retrieve_data.py', 'search', query]);
 
     let dataToSend = '';
     pythonProcess.stdout.on('data', (data) => {
@@ -77,7 +81,7 @@ app.post('/api/search', (req, res) => {
 app.post('/api/byLikes', (req, res) => {
     const { query } = req.body;
 
-    const pythonProcess = spawn('python', ['../python/retrieve_data.py', 'sort', query]);
+    const pythonProcess = spawn('python3', ['../python/retrieve_data.py', 'sort', query]);
 
     let dataToSend = '';
     pythonProcess.stdout.on('data', (data) => {
@@ -98,7 +102,7 @@ app.post('/api/byLikes', (req, res) => {
 app.post('/api/bySentiment', (req, res) => {
     const { query, sentiment } = req.body;
 
-    const pythonProcess = spawn('python', ['../python/sentiment_analysis.py', query]);
+    const pythonProcess = spawn('python3', ['../python/sentiment_analysis.py', query]);
 
     let dataToSend = '';
     pythonProcess.stdout.on('data', (data) => {
