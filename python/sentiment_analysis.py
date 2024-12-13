@@ -1,10 +1,11 @@
 import sys
 import json
 from textblob import TextBlob
+from transformers import pipeline
 import retrieve_data
 
 # Used simple Rule-based Sentiment Analysis Technique using TextBlob Python Library.
-# This can be replaced with other preferrable techniques or your own trained NLP Model :)
+# This can be replaced with other preferrable techniques or your own trained NLP Model like BERT :)
 
 
 def analyze_sentiment(comment):
@@ -13,7 +14,13 @@ def analyze_sentiment(comment):
         return 'positive'
     else:
         return 'negative'
+        
+sentiment_analyzer = pipeline("sentiment-analysis")
 
+def analyze_sentiment_BERT(comment):
+    result = sentiment_analyzer(comment)     #Perform sentiment analysis using the BERT model
+    sentiment = result[0]['label'].lower()   #Extract the label (POSITIVE or NEGATIVE) and convert to lowercase
+    return sentiment
 
 def get_sentiments(query_str):
     comments = retrieve_data.process_comments('search', query_str)
